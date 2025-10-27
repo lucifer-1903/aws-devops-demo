@@ -1,16 +1,16 @@
 version: 0.2
 
-phase:
+phases:
   install:
     commands:
       - echo installing python
-      - yum install python:3.9 -y
+      - yum install python3.9 -y
   
-  pre_install:
+  pre_build:
     commands:
       - echo login into ecr
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 554580246819.dkr.ecr.ap-south-1.amazonaws.com
-      - yum install -r requirements.txt
+      - pip install -r requirements.txt
       - yum install docker -y
   
   build:
@@ -19,9 +19,9 @@ phase:
   
   post_build:
     commands:
+      - docker tag aws-devops-demo:latest 554580246819.dkr.ecr.ap-south-1.amazonaws.com/aws-devops-demo:latest
       - docker push 554580246819.dkr.ecr.ap-south-1.amazonaws.com/aws-devops-demo:latest
       - printf '[{"name":"container-name","image":"%s"}]' 554580246819.dkr.ecr.ap-south-1.amazonaws.com/aws-devops-demo:latest > imagedefinitions.json
 
   artifacts:
-    commands:
       - imagedefinitions.json

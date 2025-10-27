@@ -23,6 +23,6 @@ phases:
       - docker push 554580246819.dkr.ecr.ap-south-1.amazonaws.com/aws-devops-demo:latest
       - printf '[{"name":"container-name","image":"%s"}]' 554580246819.dkr.ecr.ap-south-1.amazonaws.com/aws-devops-demo:latest > imagedefinitions.json
 
-  artifacts:
-    files:
-      - imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json

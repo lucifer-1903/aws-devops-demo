@@ -15,7 +15,7 @@ phase:
   
   build:
     commands:
-      - docker build -t 554580246819.dkr.ecr.ap-south-1.amazonaws.com/aws-devops-demo:latest .
+      - docker build -t aws-devops-demo .
   
   post_build:
     commands:
